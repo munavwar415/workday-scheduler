@@ -1,65 +1,81 @@
-// 10;
-// var myEvents = [
-//   { start: 30, end: 150 }, // start and end are the minutes from midnight
-
-//   { start: 540, end: 600 }, // start and end go from calendar_start to calendar_end
-
-//   { start: 560, end: 620 },
-
-//   { start: 610, end: 670 },
-// ];
-
-// // add events to the calendar
-
-// $("#calendar").addEvents(myEvents);
-
-// $("#calendar").layOutDay();
-
-// $(function () {
-//   $("#saveButton").click(function () {
-//     var data = document.getElementById("comment").Value;
-//     $('input[type="text"]').each(function () {
-//       localStorage.setItem(data);
-//     });
-//   });
-// });
-// var data = document.getElementById("#comment").Value;
-// var button = document.getElementById("#saveButton");
-// var saveTasks = function (button) {
-//   localStorage.setItem("data", JSON.stringify(tasks));
-//   if (!data) {
-//     data = {
-//       comment: [],
-
-//     };
-// };
-
-// var loadTasks = function () {
-//   tasks = JSON.parse(localStorage.getItem("data"));
-// };
-
-// loadTasks();
-
-// $("#saveButton").on("click", function () {
-//   $("#comment").each(function () {
-//     var id = $(this).attr("id");
-//     var value = $(this).val();
-//     localStorage.setItem("#comment" JSON.stringify(#comment));
-//   });
-// });
 jQuery(document).ready(function () {
-  $("#saveButton").click(function () {
+  var now = moment().format("dddd MMM Do");
+  currentDay.append(now);
+
+  var time = moment().set("hour", 17);
+  console.log(time);
+
+  //   var hourEL = function () {
+  //   var currentTime = moment().hour();
+  //   $(".time-block").each(function () {
+  //     var taskTime = parseInt($(this).attr("id"));
+  //     if (taskTime < 6) {
+  //       taskTime += 12;
+  //     }
+
+  //     if (taskTime < currentTime) {
+  //       $(this).removeClass(["present", "future"]).addClass("past");
+  //       $(this).find(".comment").prop("disabled", true);
+  //     } else if (taskTime === currentTime) {
+  //       $(this).removeClass(["past", "future"]).addClass("present");
+  //     } else {
+  //       $(this).removeClass(["past", "present"]).addClass("future");
+  //     }
+  //     update();
+  //     setInterval(update, 1000);
+  //   });
+  //   };
+  //   hourEL();
+
+  var currentHour = moment().hour(); //get current time hour
+  console.log(currentHour);
+  var colorCode = function () {
+    $(".row").each(function () {
+      var val = parseInt($(this).attr("id"));
+      if (val < 6) {
+        val += 12;
+      }
+      if (val < currentHour) {
+        $(this).removeClass(["present", "future"]).addClass("past");
+        $(this).find(".comment").prop("disabled", true);
+      } else if (val === currentHour) {
+        $(this).removeClass(["past", "future"]).addClass("present");
+      } else {
+        $(this).removeClass(["past", "present"]).addClass("future");
+      }
+      update();
+      setInterval(update, 1000);
+    });
+  };
+
+  $(".saveButton").click(function () {
     alert("Save button clicked");
   });
 
-  $("#saveButton").on("click", function () {
+  $(".saveButton").on("click", function () {
     var timeEl = $(this).parent().attr("id");
     var taskInput = $(this).siblings(".comment").val();
     localStorage.setItem(timeEl, taskInput);
+    console.log(localStorage);
   });
 
   var myTime = function () {
-    $("#9.comment").val(localStorage.getItem("9"));
+    $("#9 .comment").val(localStorage.getItem("9"));
+    $("#10 .comment").val(localStorage.getItem("10"));
+    $("#11 .comment").val(localStorage.getItem("11"));
+    $("#12 .comment").val(localStorage.getItem("12"));
+    $("#1 .comment").val(localStorage.getItem("1"));
+    $("#2 .comment").val(localStorage.getItem("2"));
+    $("#3 .comment").val(localStorage.getItem("3"));
+    $("#4 .comment").val(localStorage.getItem("4"));
+    $("#5 .comment").val(localStorage.getItem("5"));
+    $("#6 .comment").val(localStorage.getItem("6"));
+    $("#7 .comment").val(localStorage.getItem("7"));
+    $("#8 .comment").val(localStorage.getItem("8"));
+    $("#9 .comment").val(localStorage.getItem("9"));
+    $("#14 .comment").val(localStorage.getItem("14"));
   };
   myTime();
+  colorCode();
+  console.log(localStorage);
 });
