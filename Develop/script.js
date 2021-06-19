@@ -1,58 +1,31 @@
 jQuery(document).ready(function () {
+  // current day, month, date
   var now = moment().format("dddd MMM Do");
   currentDay.append(now);
 
-  var time = moment().set("hour", 17);
-  console.log(time);
-
-  //   var hourEL = function () {
-  //   var currentTime = moment().hour();
-  //   $(".time-block").each(function () {
-  //     var taskTime = parseInt($(this).attr("id"));
-  //     if (taskTime < 6) {
-  //       taskTime += 12;
-  //     }
-
-  //     if (taskTime < currentTime) {
-  //       $(this).removeClass(["present", "future"]).addClass("past");
-  //       $(this).find(".comment").prop("disabled", true);
-  //     } else if (taskTime === currentTime) {
-  //       $(this).removeClass(["past", "future"]).addClass("present");
-  //     } else {
-  //       $(this).removeClass(["past", "present"]).addClass("future");
-  //     }
-  //     update();
-  //     setInterval(update, 1000);
-  //   });
-  //   };
-  //   hourEL();
-
-  var currentHour = moment().hour(); //get current time hour
-  console.log(currentHour);
+  // function for adding and removing classes for different hours
   var colorCode = function () {
-    $(".row").each(function () {
+    var currentHour = moment().hour(); //get current time hour
+    $(".time-block").each(function () {
       var val = parseInt($(this).attr("id"));
-      if (val < 6) {
-        val += 12;
-      }
+      // controls which class is added or removed depending on the time
       if (val < currentHour) {
-        $(this).removeClass(["present", "future"]).addClass("past");
-        $(this).find(".comment").prop("disabled", true);
+        $(this).removeClass("present future").addClass("past");
+        // $(this).find(".comment").prop("disabled", true);
       } else if (val === currentHour) {
-        $(this).removeClass(["past", "future"]).addClass("present");
+        $(this).removeClass("past future").addClass("present");
       } else {
-        $(this).removeClass(["past", "present"]).addClass("future");
+        $(this).removeClass("past present").addClass("future");
       }
-      update();
-      setInterval(update, 1000);
+      //refreshes the page every 30 minutes
+      var countdown = 30 * 60 * 1000;
+      setTimeout(function () {
+        location.reload();
+      }, countdown);
     });
   };
-
-  $(".saveButton").click(function () {
-    alert("Save button clicked");
-  });
-
-  $(".saveButton").on("click", function () {
+  // saves task within a specific hour on click
+  $(".saveBtn").on("click", function () {
     var timeEl = $(this).parent().attr("id");
     var taskInput = $(this).siblings(".comment").val();
     localStorage.setItem(timeEl, taskInput);
@@ -64,18 +37,17 @@ jQuery(document).ready(function () {
     $("#10 .comment").val(localStorage.getItem("10"));
     $("#11 .comment").val(localStorage.getItem("11"));
     $("#12 .comment").val(localStorage.getItem("12"));
-    $("#1 .comment").val(localStorage.getItem("1"));
-    $("#2 .comment").val(localStorage.getItem("2"));
-    $("#3 .comment").val(localStorage.getItem("3"));
-    $("#4 .comment").val(localStorage.getItem("4"));
-    $("#5 .comment").val(localStorage.getItem("5"));
-    $("#6 .comment").val(localStorage.getItem("6"));
-    $("#7 .comment").val(localStorage.getItem("7"));
-    $("#8 .comment").val(localStorage.getItem("8"));
-    $("#9 .comment").val(localStorage.getItem("9"));
+    $("#13 .comment").val(localStorage.getItem("13"));
     $("#14 .comment").val(localStorage.getItem("14"));
+    $("#15 .comment").val(localStorage.getItem("15"));
+    $("#16 .comment").val(localStorage.getItem("16"));
+    $("#17 .comment").val(localStorage.getItem("17"));
+    $("#18 .comment").val(localStorage.getItem("18"));
+    $("#19 .comment").val(localStorage.getItem("19"));
+    $("#20 .comment").val(localStorage.getItem("20"));
+    $("#21 .comment").val(localStorage.getItem("21"));
   };
+  // activates the functions
   myTime();
   colorCode();
-  console.log(localStorage);
 });
