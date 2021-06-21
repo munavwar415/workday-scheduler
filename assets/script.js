@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
       // controls which class is added or removed depending on the time
       if (val < currentHour) {
         $(this).removeClass("present future").addClass("past");
-        // $(this).find(".comment").prop("disabled", true);
+        $(this).find(".comment").prop("disabled", true);
       } else if (val === currentHour) {
         $(this).removeClass("past future").addClass("present");
       } else {
